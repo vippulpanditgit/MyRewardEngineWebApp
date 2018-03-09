@@ -30,8 +30,7 @@ public class MyRewardMetaDataHandler {
 	public String[] add(String rule) {
 		try {
 			metaOpCodeProcessor.parse(rule);
-			MyRewardDataSegment myRewardDataSegment = eventProcessor.createDataSegment();
-			return null;
+			return metaOpCodeProcessor.getMyRewardPCodeGenerator().getCodeSegment().toArray(new String[0]);
 		} catch(Exception exp) {
 			
 		}
