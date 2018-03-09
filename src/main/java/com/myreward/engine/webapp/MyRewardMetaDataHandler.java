@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.myreward.engine.event.processor.EventProcessor;
 import com.myreward.engine.event.processor.MetaOpCodeProcessor;
+import com.myreward.engine.model.RuleRequestDO;
 import com.myreward.engine.rule.MyRewardMetaDataHashTable;
 import com.myreward.parser.generator.MyRewardDataSegment;
 
@@ -16,13 +17,12 @@ import com.myreward.parser.generator.MyRewardDataSegment;
 @RequestMapping("/rule")
 public class MyRewardMetaDataHandler {
 
-	private MetaOpCodeProcessor metaOpCodeProcessor;
-	private EventProcessor eventProcessor;
+	private RuleRequestDO ruleRequestDO;
 	
 	public MyRewardMetaDataHandler() {
-		metaOpCodeProcessor = new MetaOpCodeProcessor();
-        eventProcessor = new EventProcessor(metaOpCodeProcessor);
-		metaOpCodeProcessor.initialize();
+		ruleRequestDO = new RuleRequestDO();
+		ruleRequestDO.setMetaOpCodeProcessor(new MetaOpCodeProcessor());
+		ruleRequestDO.getMetaOpCodeProcessor().initialize();
 /*		metaOpCodeProcessor.parse(reward_metadata);
 		metaOpCodeProcessor.print_code_segment();
         MyRewardDataSegment myRewardDataSegment = eventProcessor.createDataSegment();
@@ -35,15 +35,18 @@ public class MyRewardMetaDataHandler {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String add(@RequestBody String rule) {
+	public String set(@RequestBody String rule) {
 		try {
-			String uuid = UUID.randomUUID().toString();
-			metaOpCodeProcessor.parse(rule);
-			MyRewardMetaDataHashTable.getInstance().getMetaDataHashTable().put(uuid, rule);
-			return uuid;
+			ruleRequestDO.setRule(rule);
+			ruleRequestDO.setRuleId(UUID.randomUUID().toString());
+			ruleRequestDO.getMetaOpCodeProcessor().parse(rule);
+			ruleRequestDO.getMetaOpCodeProcessor().initialize();
+			MyRewardMetaDataHashTable.getInstance().getMetaDataHashTable().put(ruleRequestDO.getRuleId(), ruleRequestDO);
+			return ruleRequestDO.getRuleId();
 		} catch(Exception exp) {
 			exp.printStackTrace();
 		}
 		return null;
 	}
+	
 }
