@@ -3,11 +3,14 @@ package com.myreward.engine.webapp;
 import java.util.UUID;
 
 import org.antlr.v4.runtime.RecognitionException;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.myreward.engine.event.error.MetadataParsingException;
@@ -21,8 +24,13 @@ public class MyRewardMetaDataHandler {
 
 	}
 	@RequestMapping(value="/rule", method = RequestMethod.GET)
-	public String get() {
-		return "TEST";
+	public ResponseEntity<String> get(@RequestParam("id") String id) {
+		if(StringUtils.isBlank(id))
+			return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
+		RuleRequestDO ruleRequestDO = MyRewardMetaDataHashTable.getInstance().getMetaDataHashTable().get(id);
+		if(ruleRequestDO==null)
+			return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
+		return new ResponseEntity<String>(ruleRequestDO.getRule(), HttpStatus.OK);
 	}
 	@RequestMapping(value="/rule", method = RequestMethod.POST)
 	public ResponseEntity<String> set(@RequestBody String rule) {
