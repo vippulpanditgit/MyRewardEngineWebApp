@@ -31,7 +31,7 @@ public class MyRewardEventHandler {
 
 			RuleRequestDO ruleRequestDO = MyRewardMetaDataHashTable.getInstance().getMetaDataHashTable().get(eventRequestDO.getRuleId());
 	        eventProcessor = new EventProcessor(ruleRequestDO.getMetaOpCodeProcessor());
-	        eventProcessor.setMyRewardDataSegment(eventProcessor.createDataSegment());
+	        eventProcessor.setMyRewardDataSegment(ruleRequestDO.getMetaOpCodeProcessor().createDataSegment());
 	        eventProcessor.create_meta_tree();
 			if(eventProcessor.process_event(eventRequestDO.getEventDO())) {
 				eventProcessor.getMyRewardDataSegment().printString();

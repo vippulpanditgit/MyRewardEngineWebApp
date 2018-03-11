@@ -48,7 +48,7 @@ public class MyRewardMetaDataHandler {
 		ruleRequestDO.getMetaOpCodeProcessor().initialize();
 		ruleRequestDO.setRule(rule);
 		ruleRequestDO.setRuleId(UUID.randomUUID().toString());
-		ruleRequestDO.getMetaOpCodeProcessor().parse(rule);
+		ruleRequestDO.getMetaOpCodeProcessor().parse(rule, false);
 		ruleRequestDO.getMetaOpCodeProcessor().initialize();
 		return ruleRequestDO;
 	}
