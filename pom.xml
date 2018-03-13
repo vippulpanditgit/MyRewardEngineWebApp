@@ -10,7 +10,30 @@
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.5.10.RELEASE</version>
 	</parent>
-
+	<repositories>
+		<repository>
+			<id>aws-release</id>
+			<name>S3 Release Repository for component1</name>
+			<url>s3://myrewardcore.repo/release/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>aws-snapshot</id>
+			<name>Component1-s3-snapshot-repo</name>
+			<url>s3://myrewardcore.repo/snapshot/</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>	
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -33,6 +56,13 @@
 		<java.version>1.8</java.version>
 	</properties>
 	<build>
+		<extensions>
+			<extension>
+				<groupId>org.springframework.build</groupId>
+				<artifactId>aws-maven</artifactId>
+				<version>5.0.0.RELEASE</version>
+			</extension>
+		</extensions>
 		<sourceDirectory>src</sourceDirectory>
 		<plugins>
 			<plugin>
