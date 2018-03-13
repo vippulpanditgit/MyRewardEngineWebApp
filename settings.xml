@@ -1,0 +1,21 @@
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                          https://maven.apache.org/xsd/settings-1.0.0.xsd">
+	<servers>
+		<server>
+			<id>aws-release</id>
+			<username>AKIAJAQ7F6GFATJMOIXA</username>
+			<password>hmC30b3V3+UeWtUdokonvgJzZPKBuRXfGgAhDS4z</password>
+		</server>
+		<server>
+			<id>aws-snapshot</id>
+			<username>AKIAJAQ7F6GFATJMOIXA</username>
+			<password>hmC30b3V3+UeWtUdokonvgJzZPKBuRXfGgAhDS4z</password>
+		</server>
+	</servers>
+	<mirrors />
+	<proxies />
+	<profiles />
+	<activeProfiles />
+</settings>
