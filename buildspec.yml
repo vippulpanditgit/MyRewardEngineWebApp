@@ -4,7 +4,7 @@ phases:
   install:
     commands:
       - echo Nothing to do in the install phase...
-      - cp ./settings.xml /root/.m2/settings.xml
+      - aws s3 cp s3://myrewardcore.repo/myreward-aws-settings/settings.xml /root/.m2/settings.xml
   pre_build:
     commands:
       - echo Nothing to do in the pre_build phase...
