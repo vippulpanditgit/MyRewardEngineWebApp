@@ -3,7 +3,7 @@ package com.myreward.engine.dataobject;
 import java.util.Date;
 import java.util.List;
 
-public class OrganizationDO {
+public class OrganizationDO extends BaseDO {
 	private String name;
 	private Date terminatedOn;
 	private String organizationType;
@@ -19,5 +19,7 @@ public class OrganizationDO {
 	private Date marketSegmentEffectiveDate;
 	private boolean isERISACompliant;//Employee Retirement Income Security Act
 	private List<OrganizationDO> subOrganizations;
+	private List<OrganizationContactDO> organizationContacts;
+	private List<OrganizationLocationDO> organizationLocations;
 
 }
